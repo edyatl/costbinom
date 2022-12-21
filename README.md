@@ -93,11 +93,12 @@ id          date        source      binom_id    date_s      date_e      timezone
     $ python3 costbin.py --binom
 ```
 
-4) Display totals collected on date from db:
+4) Display totals collected for the date from db:
 
 ```sh
     $ sqlite3 -header -column db/binom.db \
-    "SELECT date,source,binom_id,SUM(cost),COUNT(id) FROM binom WHERE date='2022-01-02' GROUP BY binom_id;"
+    "SELECT date,source,binom_id,SUM(cost),COUNT(id) FROM binom \
+    WHERE date='2022-01-02' GROUP BY binom_id;"
     date        source        binom_id    SUM(cost)   COUNT(id) 
     ----------  ------------  ----------  ----------  ----------
     2022-01-02  Propellerads  111         37.851      724       
@@ -108,5 +109,85 @@ id          date        source      binom_id    date_s      date_e      timezone
 ```
 
 Where SUM(cost) is the field for total costs of campaigns and COUNT(id) is the column for total number of entries grouped by id in the Binom tracker.
+
+5) Display log records in "live" mode:
+
+```sh
+    $ tail -f costbin.log
+```
+
+6) Open log records in cli viewer:
+
+```sh
+    $ less costbin.log
+```
+
+
+
+## Installation
+
+
+1) Clone costbinom repo from GitHub to your user directory:
+
+```sh
+    $ git clone https://github.com/edyatl/costbinom.git
+```
+
+2) Change directory to costbinom:
+
+```sh
+    $ cd costbinom
+```
+
+3) Create an empty log file:
+
+```sh
+    $ touch costbin.log
+```
+
+4) Create credentials env file with auth tokens. Next command will prompt you to insert tokens one by one:
+
+```sh
+    $ for src in $(echo 'ADSTERRA PROPELLERADS BINOM'); do \
+    read -p "type ${src} token:" tkn \
+    && echo "export ENV_${src}_TOKEN='${tkn}'"; done > .env
+```
+
+Check resulted env file:
+
+```sh
+    $ cat .env
+```
+
+5) Make sure what you have docker with compose plugin properly installed:
+
+```sh
+    $ docker compose version
+```
+
+6) Run deployment with docker compose:
+
+```sh
+    $ docker compose up -d --build
+```
+
+7) Make sure what costbinom container successfully created and running:
+
+```sh
+    $ docker ps
+```
+
+In case of empty table on command above try `docker logs` to debug.
+
+8) Enter to container shell to check cron table:
+
+```sh
+    $ docker exec -it <container_id> bash
+    # crontab -l
+```
+
+
+
+
 
 
