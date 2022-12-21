@@ -26,6 +26,6 @@ class Configuration(object):
     PROPELLERADS_BASE_URL = "https://ssp-api.propellerads.com/v5/"
     BINOM_BASE_URL = "https://trackhost.click/3k9b9.php"
 
-    DB_FILE = "db/binom.db"
-    LOG_FILE = "costbin.log"
+    DB_FILE = os.path.join(os.path.dirname(__file__), "db/binom.db")
+    LOG_FILE = os.path.join(os.path.dirname(__file__), "costbin.log")
 
