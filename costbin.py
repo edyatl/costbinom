@@ -520,11 +520,10 @@ def main():
                 sys.exit()
                 use_in_pipe = True
             elif opt in ("-v", "--version"):
-                print('Passchek version: %s' % __version__)
+                print('Costbin version: %s' % __version__)
                 sys.exit()
             else:
                 assert False, "unhandled option"
-    pass
 
 if __name__ == "__main__":
     main()
