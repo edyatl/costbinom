@@ -60,7 +60,7 @@ class BaseConnect:
                 db.execute("select id from binom")
             except sql.OperationalError:
                 self.logger.debug("Sqlite db not exists, creating it from schema")
-                db.executescript(open("db/schema.sql", "rt", encoding="utf-8").read())
+                db.executescript(open(cfg.SCHEMA_FILE, "rt", encoding="utf-8").read())
 
     def requests_call(self, verb: str, url: str, **kwargs) -> tuple:
         """

@@ -27,5 +27,6 @@ class Configuration(object):
     BINOM_BASE_URL = "https://trackhost.click/3k9b9.php"
 
     DB_FILE = os.path.join(os.path.dirname(__file__), "db/binom.db")
+    SCHEMA_FILE = os.path.join(os.path.dirname(__file__), "db/schema.sql")
     LOG_FILE = os.path.join(os.path.dirname(__file__), "costbin.log")
 
