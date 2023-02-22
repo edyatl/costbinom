@@ -518,7 +518,6 @@ def main():
             elif opt in ("-b", "--binom"):
                 task_binom()
                 sys.exit()
-                use_in_pipe = True
             elif opt in ("-v", "--version"):
                 print('Costbin version: %s' % __version__)
                 sys.exit()
